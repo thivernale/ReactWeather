@@ -1,1 +1,7 @@
 /node_modules/
+/.project
+/.settings/
+/README
+/git-readme
+/example-arrow-functions.js
+/example-promise.js
