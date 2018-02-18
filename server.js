@@ -7,7 +7,7 @@ var express = require('express');
 // create a new app:
 // call express library as a function with no args
 var app = express();
-// get port from environment (on Heroku) or specify default one (for local use)
+// get port from environment variable (on Heroku) or specify default one (for local use)
 // In ES6 and Node we can use "const" keyword to define constants
 const PORT = process.env.PORT || 3000;
 
