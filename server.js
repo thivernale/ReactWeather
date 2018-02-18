@@ -15,12 +15,12 @@ const PORT = process.env.PORT || 3000;
 // a common pattern for express middleware (lets us do something with every request)
 app.use(function(req, res, next) {
     // we are going to redirect traffic if it is over HTTPS
-    if (req.headers['x-forwarded-proto'] === 'http') {
-        // call next function, do nothing
-        next();
-    } else {
+    if (req.headers['x-forwarded-proto'] === 'https') {
         // redirect to same URL over HTTP
         res.redirect('http://' + req.hostname + req.url);
+    } else {
+        // call next function, do nothing
+        next();
     }
 });
 
