@@ -1,3 +1,6 @@
+// require webpack
+var webpack = require('webpack');
+
 /**
  * configuration file for running webpack for project with
  * cannot be done just from command line because JSX (Babel, React) and ES6 functionality is used in project
@@ -12,7 +15,20 @@ module.exports = {
     // the entry point is where webpack starts compiling the bundle file from
     // by default webpack does not know what to do with a jsx file
     // "app" folder will contain all the raw files
-    entry: './app/app.jsx',
+    entry: [
+        'script!jquery/dist/jquery.min.js',
+        'script!foundation-sites/dist/foundation.min.js',
+        './app/app.jsx'
+    ],
+    externals: {
+        jquery: 'jQuery'
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
+    ],
     // output:
     output: {
         // in nodejs this gives us the path to the current folder

@@ -33,6 +33,14 @@ var Weather = require('Weather');
 var About = require('About');
 var Examples = require('Examples');
 
+// Load foundation
+// but require itself does not know how to load a css file so we need to use the css-loader;
+// we also need to inject it into the html, adding style-loader first
+require('style!css!foundation-sites/dist/foundation.min.css');
+
+// fire up foundation
+$(document).foundation();
+
 // we created a SPA (single-page application) that has multiple pages defined by routes
 ReactDOM.render(
     <Router history={hashHistory}>
