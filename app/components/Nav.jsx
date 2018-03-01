@@ -16,9 +16,13 @@ var { Link, IndexLink } = require('react-router');
 });*/
 
 // now we use foundation styling
-// but we use "className" attrubute instead of "class" because otherwise there will be a collision with the jsx property with the same name
+// but we use "className" attrubute instead of "class" for HTML classes 
+// because otherwise there will be a collision with the jsx property with the same name
 var Nav = React.createClass({
+    // this can no longer be a presentational component as we are defining other methods in it
     onSearch: function(e) {
+        // prevent the browser from refreshing the page
+        // since we want to handle the submit ourselves
         e.preventDefault();
         alert('Not yet wired up!');
     },
