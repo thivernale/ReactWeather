@@ -1,6 +1,7 @@
 var React = require('react');
 var WeatherForm = require('WeatherForm');
 var WeatherMessage = require('WeatherMessage');
+var ErrorModal = require('ErrorModal');
 var openWeatherMap = require('openWeatherMap');
 
 var Weather = React.createClass({
@@ -25,7 +26,10 @@ var Weather = React.createClass({
         var that = this;
 
         // before sending request:
-        this.setState({ isLoading: true });
+        this.setState({
+            isLoading: true,
+            errorMessage: undefined
+        });
 
         // use a third-party library to fetch data
         openWeatherMap.getTemp(location).then(function(temp) {
@@ -34,15 +38,16 @@ var Weather = React.createClass({
                 temp: temp,
                 isLoading: false
             });
-        }, function(errorMessage) {
+        }, function(e) {
             that.setState({
-                isLoading: false
+                isLoading: false,
+                errorMessage: e.message // parameter "e" is a javascript Error object
             });
-            alert(errorMessage);
+            //alert(errorMessage);
         });
     },
     render: function() {
-        var { isLoading, temp, location } = this.state;
+        var { isLoading, temp, location, errorMessage } = this.state;
 
         // create a way to conditionally render either the loading or the message component
         // function should return JSX code
@@ -59,11 +64,19 @@ var Weather = React.createClass({
             }
         }
 
+        // we will do conditional rendering for the error modal as well:
+        function renderError() {
+            if (typeof errorMessage === 'string') {
+                return <ErrorModal message={errorMessage} />;
+            }
+        }
+
         return (
             <div>
                 <h1 className="text-center">Get Weather</h1>
                 <WeatherForm onSearch={this.handleSearch} />
                 {renderMessage()}
+                {renderError()}
                 {(function() { /*return 'hello';*/ })()}
             </div>
         );
