@@ -42,7 +42,7 @@ require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
 // App css - load it with an alias defined in webpack.config.js because the location might be subject to change
-require('style!css!applicationStyles');
+require('style!css!sass!applicationStyles');
 
 // we created a SPA (single-page application) that has multiple pages defined by routes
 ReactDOM.render(
