@@ -49,7 +49,8 @@ module.exports = {
             About: 'app/components/About.jsx',
             Examples: 'app/components/Examples.jsx',
             openWeatherMap: 'app/api/openWeatherMap.jsx',
-            ErrorModal: 'app/components/ErrorModal.jsx'
+            ErrorModal: 'app/components/ErrorModal.jsx',
+            applicationStyles: 'app/styles/app.css'
         },
         // file extensions that we want to process
         extensions: ['', '.js', '.jsx']

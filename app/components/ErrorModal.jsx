@@ -9,6 +9,7 @@ var ErrorModal = React.createClass({
     },
 
     // specify validation - type and required - for passed properties:
+    // @see https://reactjs.org/docs/typechecking-with-proptypes.html
     propTypes: {
         title: React.PropTypes.string,
         message: React.PropTypes.string.isRequired
