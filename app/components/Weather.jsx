@@ -17,6 +17,7 @@ var Weather = React.createClass({
             isLoading: false
         };
     },
+
     handleSearch: function(location) {
         // mock handling
         /*this.setState({
@@ -25,10 +26,12 @@ var Weather = React.createClass({
         });*/
         var that = this;
 
-        // before sending request:
+        // before sending request clean up all our data:
         this.setState({
             isLoading: true,
-            errorMessage: undefined
+            errorMessage: undefined,
+            location: undefined,
+            temp: undefined
         });
 
         // use a third-party library to fetch data
@@ -46,6 +49,33 @@ var Weather = React.createClass({
             //alert(errorMessage);
         });
     },
+
+    // method is run when component is first loaded
+    componentDidMount: function() {
+        // pull data from the React router
+        var location = this.props.location.query.location;
+
+        // if there is a location specified in query string, run the search with it
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            // remove location from query string
+            window.location = '#/';
+        }
+    },
+
+    // gets called every time the component's props get updated
+    componentWillReceiveProps: function(newProps) {
+        // get data from new props
+        var location = newProps.location.query.location;
+
+        // if there is a location specified in query string, run the search with it
+        if (location && location.length > 0) {
+            this.handleSearch(location);
+            // remove location from query string
+            window.location = '#/';
+        }
+    },
+
     render: function() {
         var { isLoading, temp, location, errorMessage } = this.state;
 
