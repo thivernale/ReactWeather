@@ -8,18 +8,19 @@ var express = require('express');
 // call express library as a function with no args
 var app = express();
 // get port from environment variable (on Heroku) or specify default one (for local use)
-// In ES6 and Node we can use "const" keyword to define constants
+// in NodeJS environment variables can be used through "process"
+// In ES6 and NodeJS we can use "const" keyword to define constants
 const PORT = process.env.PORT || 3000;
 
 // we are redirecting https requests to weather API over http
 // a common pattern for express middleware (lets us do something with every request)
 app.use(function(req, res, next) {
-    // we are going to redirect traffic if it is over HTTPS
+    // we are going to redirect traffic if request is over HTTPS
     if (req.headers['x-forwarded-proto'] === 'https') {
         // redirect to same URL over HTTP
         res.redirect('http://' + req.hostname + req.url);
     } else {
-        // call next function, do nothing
+        // call next function when middleware is done, do nothing
         next();
     }
 });
