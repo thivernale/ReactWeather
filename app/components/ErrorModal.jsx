@@ -17,9 +17,13 @@ var ErrorModal = React.createClass({
         message: React.PropTypes.string.isRequired
     },
 
-    // lifecycle hooks:
-    // The componentDidMount() hook runs after the component output has been rendered to the DOM.
-    // @see https://reactjs.org/docs/state-and-lifecycle.html
+    /**
+     * lifecycle hooks:
+     * The componentDidMount() hook runs after the component output has been rendered to the DOM.
+     * 
+     * @link https://reactjs.org/docs/state-and-lifecycle.html
+     * @see https://reactjs.org/docs/state-and-lifecycle.html
+     * */
     componentDidMount: function() {
 
         var { title, message } = this.props;
@@ -35,14 +39,15 @@ var ErrorModal = React.createClass({
             </div>
         );
 
-        // now we have to add this markup into the dom
+        // now we have to add this markup into the DOM
 
-        // create variable with $ - because it is going to be a jquery selector
-        // first render JSX code to sting, then pass it to create the contents
+        // create variable with $ - because it is going to be a jquery selector (object that has the contents we want to add to the DOM)
+        // first render JSX markup code to a string, then pass it to create the contents
         var $modal = $(ReactDOMServer.renderToString(modalMarkup));
 
-        // add  to the component
-        // find the component DOM node, then use jQuery html method to pass the markup to show to the screen
+        // add to the component
+        // method findDOMNode takes the component as a parameter and finds the component DOM node;
+        // then use jQuery html method to pass the markup to show to the screen
         $(ReactDOM.findDOMNode(this)).html($modal);
 
         // create a new instance of a Modal:
